@@ -1,7 +1,7 @@
 import { getSession } from '@auth0/nextjs-auth0';
 //on login i want to add the user to firebase and then redirect to the dashboard
 export function Login() {
-  return <a href="/api/auth/login"><button className="px-4 py-2 text-white bg-blue-500 rounded-lg">Login</button></a>;
+  return <a href="/api/auth/login?returnTo=/register-user"><button className="px-4 py-2 text-white bg-blue-500 rounded-lg">Login / Register</button></a>;
 }
 
 export function Logout() {

@@ -2,16 +2,9 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
+  BookOpenCheck,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -26,6 +19,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user"
+import Image from "next/image"
 
 const data = {
   user: {
@@ -35,88 +29,21 @@ const data = {
   },
   navMain: [
     {
-      title: "Playground",
+      title: "Assessments",
       url: "#",
-      icon: SquareTerminal,
+      icon: BookOpenCheck,
       isActive: true,
       items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
+        { title: "Depression", url: "assmt/depression" },
+        { title: "Anxiety", url: "assmt/anxiety" },
+        { title: "Bipolar", url: "assmt/bipolar-disorder" },
+        // { title: "OCD", url: "assmt/ocd" },
+        // { title: "PTSD", url: "assmt/ptsd" },
+        // { title: "Schizophrenia", url: "assmt/schizophrenia" },
+        { title: "ADHD", url: "assmt/adhd" },
+        // { title: "Eating Disorders", url: "assmt/eating-disorders" },
+        // { title: "Substance Use", url: "assmt/substance-use-disorders" },
+        // { title: "Personality Disorders", url: "assmt/personality-disorders" },
       ],
     },
   ],
@@ -141,13 +68,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
+                  <Image src="/bigLogo.png" alt="Sukoon" width={50} height={50} />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-semibold">Sukoon</span>
+                  <span className="truncate text-xs"></span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -159,7 +86,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )

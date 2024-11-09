@@ -1,4 +1,5 @@
 // src/chatRoom/ChatService.js
+import { MessageType } from '@/types/chat';
 import { db } from '../firebaseConfig';
 import { collection, doc, query, orderBy, onSnapshot, addDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 
@@ -19,13 +20,14 @@ class ChatService {
     });
   }
 
-  static subscribeToMessages(roomId: string, callback: ) {
+  static subscribeToMessages(roomId: string, callback: React.Dispatch<React.SetStateAction<MessageType[]>>
+  ) {
     const messagesRef = collection(db, 'chatRooms', roomId, 'messages');
     const messagesQuery = query(messagesRef, orderBy('timestamp'));
 
     // Subscribe to messages and call the callback with real-time updates
     return onSnapshot(messagesQuery, (snapshot) => {
-      const messages = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const messages = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })) as MessageType[];
       callback(messages);
     });
   }

@@ -1,15 +1,23 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import ChatService from '@/lib/chat-service';
-import { Message } from '@/types/chat';
+import Message from '@/components/chat/message';
+import { MessageType } from '@/types/chat';
+import ChatInput from '@/components/chat/chat-input';
+import { useSearchParams } from 'next/navigation';
 
 export default function ChatRoomPage({ params }: { params: { room: string } }) {
-    const router = useRouter();
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<MessageType[]>([]);
 
-    const nickname = router.query.nickname as string;
-    const uid = router.query.uid as string;
+
+    const searchParams = useSearchParams()
+    const nickname = searchParams.get('nickname');
+    const uid = searchParams.get('uid');
+    const room = params.room;
+
+    if(!nickname || !uid) {
+        return <div>Missing nickname or uid</div>
+    }
 
     useEffect(() => {
         if (room) {
@@ -18,6 +26,21 @@ export default function ChatRoomPage({ params }: { params: { room: string } }) {
         }
     }, [room]);
 
-    return <div>My Post: {params.room}</div>
+    const sendMessage = (text: string) => {
+        ChatService.sendMessage(room, { text, uid, displayName: nickname });
+    };
+    return (
+        <div className="container mx-auto p-4">
+            <h5 className="text-xl font-bold mb-4">{`Chat Room: ${room}`}</h5>
+            <div className="border rounded-lg p-4 mb-4">
+                <ul className="space-y-2">
+                    {messages.map(message => (
+                        <Message key={message.id} message={message} userId={uid} />
+                    ))}
+                </ul>
+            </div>
+            <ChatInput onSend={sendMessage} />
+        </div>
+    );
 }
 

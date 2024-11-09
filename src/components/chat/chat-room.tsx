@@ -1,0 +1,1 @@
+// create a basic components using  <ChatRoom userId={uid} displayName={displayName} room={selectedRoom} />

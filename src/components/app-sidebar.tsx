@@ -2,16 +2,9 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
+  BookOpenCheck,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -27,7 +20,6 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user"
 import Image from "next/image"
-import Link from "next/link"
 
 const data = {
   user: {
@@ -39,19 +31,19 @@ const data = {
     {
       title: "Assessments",
       url: "#",
-      icon: SquareTerminal,
+      icon: BookOpenCheck,
       isActive: true,
       items: [
         { title: "Depression", url: "assmt/depression" },
-        { title: "Anxiety", url: "assmt/anxiety-disorders" },
+        { title: "Anxiety", url: "assmt/anxiety" },
         { title: "Bipolar", url: "assmt/bipolar-disorder" },
-        { title: "OCD", url: "assmt/ocd" },
-        { title: "PTSD", url: "assmt/ptsd" },
-        { title: "Schizophrenia", url: "assmt/schizophrenia" },
+        // { title: "OCD", url: "assmt/ocd" },
+        // { title: "PTSD", url: "assmt/ptsd" },
+        // { title: "Schizophrenia", url: "assmt/schizophrenia" },
         { title: "ADHD", url: "assmt/adhd" },
-        { title: "Eating Disorders", url: "assmt/eating-disorders" },
-        { title: "Substance Use", url: "assmt/substance-use-disorders" },
-        { title: "Personality Disorders", url: "assmt/personality-disorders" },
+        // { title: "Eating Disorders", url: "assmt/eating-disorders" },
+        // { title: "Substance Use", url: "assmt/substance-use-disorders" },
+        // { title: "Personality Disorders", url: "assmt/personality-disorders" },
       ],
     },
   ],

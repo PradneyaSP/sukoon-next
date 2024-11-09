@@ -1,4 +1,5 @@
 import { getSession } from '@auth0/nextjs-auth0/edge';
+import next from 'next';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -11,11 +12,18 @@ export async function middleware(req: NextRequest) {
     const isLogin = pathname === "/api/auth/login";
     const isSignUp = pathname === "/api/auth/signup";
     const isAccessingSensitiveRoutes = sensitiveRoutes.some((route) => pathname.startsWith(route));
-    console.log(isLogin, isSignUp, isAccessingSensitiveRoutes);
+ 
     const session = await getSession();
-    if (!session) {
+    if (!session && isLogin) {
+        return NextResponse.next(); // Allow access to login route
+    }
+    else if (!session && isSignUp) {
+        return NextResponse.next(); // Allow access to signup route
+    }
+    else if (!session) {
         return NextResponse.redirect(new URL("/api/auth/login", req.nextUrl.origin));
     }
+
     const user = session?.user;
 
     if (user) {

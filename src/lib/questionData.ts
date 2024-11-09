@@ -1,9 +1,7 @@
-// lib/questionData.ts
-
 export const questions = [
   // Depression Questions
   {
-    text: "Little interest or pleasure in doing things?",
+    text: "Hey! Little interest or pleasure in doing things?",
     options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
     disorder: "depression"
   },
@@ -13,12 +11,12 @@ export const questions = [
     disorder: "depression"
   },
   {
-    text: "Trouble falling or staying asleep, or sleeping too much?",
+    text: "Here's one more: Trouble falling or staying asleep, or sleeping too much?",
     options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
     disorder: "depression"
   },
   {
-    text: "Feeling tired or having little energy?",
+    text: "Please respond: Feeling tired or having little energy?",
     options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
     disorder: "depression"
   },
@@ -30,12 +28,12 @@ export const questions = [
 
   // Anxiety Questions
   {
-    text: "Feeling nervous, anxious, or on edge?",
+    text: "Hey! Feeling nervous, anxious, or on edge?",
     options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
     disorder: "anxiety"
   },
   {
-    text: "Not being able to stop or control worrying?",
+    text: "Please respond: Not being able to stop or control worrying?",
     options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
     disorder: "anxiety"
   },
@@ -45,7 +43,7 @@ export const questions = [
     disorder: "anxiety"
   },
   {
-    text: "Trouble relaxing?",
+    text: "Here's one more: Trouble relaxing?",
     options: ["Not at all", "Several days", "More than half the days", "Nearly every day"],
     disorder: "anxiety"
   },
@@ -57,7 +55,7 @@ export const questions = [
 
   // Bipolar Disorder Questions
   {
-    text: "Has there ever been a period when you felt so good or hyper that others thought you were not your usual self?",
+    text: "Hey! Has there ever been a period when you felt so good or hyper that others thought you were not your usual self?",
     options: ["Yes", "No"],
     disorder: "bipolar"
   },
@@ -72,19 +70,19 @@ export const questions = [
     disorder: "bipolar"
   },
   {
-    text: "Did you get much less sleep than usual and still feel okay?",
+    text: "Here's one more: Did you get much less sleep than usual and still feel okay?",
     options: ["Yes", "No"],
     disorder: "bipolar"
   },
 
   // ADHD Questions
   {
-    text: "How often do you have trouble wrapping up the final details of a project?",
+    text: "Hey! How often do you have trouble wrapping up the final details of a project?",
     options: ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
     disorder: "adhd"
   },
   {
-    text: "How often do you have difficulty getting things in order when you have to do a task that requires organization?",
+    text: "Please respond: How often do you have difficulty getting things in order when you have to do a task that requires organization?",
     options: ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
     disorder: "adhd"
   },
@@ -94,7 +92,7 @@ export const questions = [
     disorder: "adhd"
   },
   {
-    text: "How often do you avoid or delay getting started on tasks that require a lot of thought?",
+    text: "Here's one more: How often do you avoid or delay getting started on tasks that require a lot of thought?",
     options: ["Never", "Rarely", "Sometimes", "Often", "Very Often"],
     disorder: "adhd"
   },

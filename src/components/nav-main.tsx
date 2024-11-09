@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sidebar"
 
 export function NavMain({
-  items,
+  items, isMentor
 }: {
   items: {
     title: string
@@ -31,7 +31,8 @@ export function NavMain({
       title: string
       url: string
     }[]
-  }[]
+  }[],
+  isMentor: boolean
 }) {
   return (
     <SidebarGroup>

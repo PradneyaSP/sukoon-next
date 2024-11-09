@@ -5,16 +5,18 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { cookies } from "next/headers";
 
 export default function DashboardLayout({
     children
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const isMentor = cookies().get("isMentor")?.value === "true";
     return (
         <div>
             <SidebarProvider>
-                <AppSidebar />
+                <AppSidebar isMentor={isMentor}/>
                 <SidebarInset>
                     <header className="flex h-16 shrink-0 items-center gap-2">
                         <div className="flex items-center gap-2 px-4">

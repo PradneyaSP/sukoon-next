@@ -17,7 +17,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -31,7 +30,7 @@ import {
 } from "@/components/ui/sidebar"
 import { useUser } from "@auth0/nextjs-auth0/client"
 
-export function NavUser() {
+export function NavUser({isMentor}: Readonly<{isMentor: boolean}>) {
   const { isMobile } = useSidebar()
   const {user, error, isLoading } = useUser();
   if(isLoading) return <div>Loading...</div>;

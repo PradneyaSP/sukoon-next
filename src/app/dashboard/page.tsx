@@ -1,16 +1,19 @@
 "use client"
 import React from "react";
-import { useUser } from '@auth0/nextjs-auth0/client';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const Dashboard = () => {
-  const { user, error, isLoading } = useUser();
+  const  { user, error, isLoading } = useUser();
   const isAuthenticated = user ? true : false;
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
   if (!isAuthenticated) return null;
+
+  //get cookie isMentor using cookies() function
+  const isMentor = document.cookie.split('; ').find(row => row.startsWith('isMentor='))?.split('=')[1] === 'true';
 
   return (
     <div className="flex h-fit m-4">

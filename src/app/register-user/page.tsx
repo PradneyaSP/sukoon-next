@@ -32,10 +32,13 @@ const RegisterMentor = () => {
                 const mentorDoc = await getDoc(mentorDocRef);
                 const userDoc = await getDoc(userDocRef);
 
-                console.log("mentorDoc:", mentorDoc.exists);
-                console.log("userDoc:", userDoc.exists);
+                if (mentorDoc.exists()) {
+                    document.cookie = "isMentor=true; path=/;";
 
-                if (mentorDoc.exists() || userDoc.exists()) {
+                    setIsRedirecting(true);
+                    router.push("/dashboard");
+                }
+                else if (userDoc.exists()) {
                     setIsRedirecting(true);
                     router.push("/dashboard");
                 }
@@ -45,7 +48,7 @@ const RegisterMentor = () => {
         }
 
         checkUserExists();
-    }, []);
+    }, [user]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -97,8 +100,8 @@ const RegisterMentor = () => {
                     <Input id="experience" type="number" placeholder="Experience" value={experience} onChange={(e) => setExperience(e.target.value)} required />
                     <Input id="qualification" type="text" placeholder="Qualification" value={qualification} onChange={(e) => setQualification(e.target.value)} required />
                     <Textarea id="description" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-                    <Button type="submit" className="bg-green-400 hover:bg-green-500 text-foreground font-semibold">Submit</Button>   
-                    <Button onClick={()=>{setShowForm(false)}}>Go Back</Button>
+                    <Button type="submit" className="bg-green-400 hover:bg-green-500 text-foreground font-semibold">Submit</Button>
+                    <Button onClick={() => { setShowForm(false) }}>Go Back</Button>
                 </form>
             </div>
             )}

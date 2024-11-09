@@ -61,7 +61,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ isMentor, ...props }: React.ComponentProps<typeof Sidebar> & { isMentor: boolean }) {
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -82,11 +82,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain} isMentor={isMentor} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser />
+        <NavUser isMentor={isMentor} />
       </SidebarFooter>
     </Sidebar>
   )

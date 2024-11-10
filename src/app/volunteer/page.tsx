@@ -28,7 +28,7 @@ export default function Volunteer() {
         <h5 className="text-lg font-semibold">
           Sukoon, 24/7 emotional support to millions via online chat. We want to ensure nobody has to face their problems alone.
         </h5>
-        <p className="mt-4">How does it work? It's easy! We provide free online training & support - all you need is an internet connection to get started.</p>
+        <p className="mt-4">{`How does it work? It's easy! We provide free online training & support - all you need is an internet connection to get started.`}</p>
       </div>
 
       {/* Volunteer Info Cards */}
@@ -48,7 +48,7 @@ export default function Volunteer() {
       </div>
 
       {/* Signup Form */}
-      <section className="bg-cover bg-center py-16" style={{ backgroundImage: "url('/img/vol1.jpg')" }}>
+      <section className="bg-cover bg-center py-16" style={{ backgroundImage: "url('/Image/vol1.jpg')" }}>
         <div className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-center">Volunteer Signup</h2>
           <form className="space-y-4 mt-4">
@@ -60,7 +60,7 @@ export default function Volunteer() {
             <input type="tel" className="border px-4 py-2 w-full rounded" placeholder="Contact number" />
             <input type="date" className="border px-4 py-2 w-full rounded" />
             <input type="text" className="border px-4 py-2 w-full rounded" placeholder="Highest education" />
-            <textarea className="border px-4 py-2 w-full rounded" rows="3" placeholder="Tell us about yourself"></textarea>
+            <textarea className="border px-4 py-2 w-full rounded" rows={3} placeholder="Tell us about yourself"></textarea>
             <div className="flex items-center gap-2">
               <input type="checkbox" className="form-check-input" />
               <label className="text-sm">Agree all terms & conditions</label>
@@ -80,7 +80,7 @@ export default function Volunteer() {
       <div className="flex flex-wrap justify-center gap-8 py-8">
         {['Zain', 'Raj', 'Jaya', 'Jyoti'].map((name, index) => (
           <div key={index} className="bg-gray-100 p-6 rounded-lg shadow-md text-center w-40">
-            <img src='/image.png' alt={name} width={100} height={100} className="mx-auto rounded-full" />
+            <Image src='/image.png' alt={name} width={100} height={100} className="mx-auto rounded-full" />
             <h4 className="mt-4 font-bold">{name}</h4>
             <p>{['Artist', 'CEO', 'Teacher', 'Doctor'][index]}</p>
           </div>

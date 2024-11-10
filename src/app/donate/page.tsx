@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -40,8 +39,7 @@ const Donation: React.FC = () => {
           <div className="p-6">
             <h5 className="text-center text-blue-600 text-2xl font-bold mb-4">Food Offering</h5>
             <p>
-            Our volunteers have been serving meals to the homeless once each month since 2003. The volunteers prepare the food at home and serve in different temples in India. The vegetarian meal consists of rice, dal,sabzi,roti, salad, fruit, and dessert.One elderly man movingly reflected that the spirit of hospitality he felt at Sahara Kitchen was for him an expression of real worship, and another commented that while he did not usually like vegetarian food, the food at Sahara Kitchen was delicious. Sue, a volunteer from Mumbai reflected, "Actually, we're not just feeding them food, we're feeding them love and kindness, which is exactly what Amma does."
-            </p>
+{`            "Our volunteers have been serving meals to the homeless once each month since 2003. The volunteers prepare the food at home and serve in different temples in India. The vegetarian meal consists of rice, dal,sabzi,roti, salad, fruit, and dessert.One elderly man movingly reflected that the spirit of hospitality he felt at Sahara Kitchen was for him an expression of real worship, and another commented that while he did not usually like vegetarian food, the food at Sahara Kitchen was delicious. Sue, a volunteer from Mumbai reflected, "Actually, we're not just feeding them food, we're feeding them love and kindness, which is exactly what Amma does."`}            </p>
           </div>
         </div>
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -49,7 +47,7 @@ const Donation: React.FC = () => {
           <div className="p-6">
             <h5 className="text-center text-blue-600 text-2xl font-bold mb-4">Education</h5>
             <p>
-            Our volunteers have been teaching underprivilidge kids once each month since 2003. We distribute stationary items to the kids. As we believe everyone has a right to education. We have adopted two villages of Greater Noida. Like a tree, poverty has many roots. But among the many causes of global poverty, one factor stands out: education. Not every person without an education is living in extreme poverty. But most of those living in extreme poverty do lack a basic education. Those living below the poverty line will also be more likely to keep their children out of school, leads to a greater chance of living in poverty in future."
+            {`"Our volunteers have been teaching underprivilidge kids once each month since 2003. We distribute stationary items to the kids. As we believe everyone has a right to education. We have adopted two villages of Greater Noida. Like a tree, poverty has many roots. But among the many causes of global poverty, one factor stands out: education. Not every person without an education is living in extreme poverty. But most of those living in extreme poverty do lack a basic education. Those living below the poverty line will also be more likely to keep their children out of school, leads to a greater chance of living in poverty in future."`}
 
 
             </p>
@@ -60,7 +58,7 @@ const Donation: React.FC = () => {
           <div className="p-6">
             <h5 className="text-center text-blue-600 text-2xl font-bold mb-4">Love Offering</h5>
             <p>
-            Stray animals are any domesticated animal who does not have a home, Our volunteers have been saving stray Animals for couple of years. Since we have now more then 50 star animals including cows, dogs, cats, injured birds etc. We have built a shelter for them. Donation money is mostly used on these innocent animals food, clothing, vacination, medical test, hygiene care items and medicens. As we beileve Strays are not a random occurrence but a symptom of a bigger problem caused by the following: irresponsible pet ownership, pet owners not spaying/neutering their pets, people still BUYING and BREEDING instead of adopting or fostering shelter and rescue animals."
+            {`"Stray animals are any domesticated animal who does not have a home, Our volunteers have been saving stray Animals for couple of years. Since we have now more then 50 star animals including cows, dogs, cats, injured birds etc. We have built a shelter for them. Donation money is mostly used on these innocent animals food, clothing, vacination, medical test, hygiene care items and medicens. As we beileve Strays are not a random occurrence but a symptom of a bigger problem caused by the following: irresponsible pet ownership, pet owners not spaying/neutering their pets, people still BUYING and BREEDING instead of adopting or fostering shelter and rescue animals."`}
             </p>
           </div>
         </div>

@@ -4,11 +4,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import StartHereButton from "@/components/startButton";
-const cards = [
-  { title: "Employee Database Management", color: "bg-transparent", image: "/images/calender.png" },
-  { title: "Performance Management", color: "bg-transparent", image: "/images/clock.png" },
-  { title: "Employee Onboarding", color: "bg-transparent", image: "/images/alert.png" },
-];
+// const cards = [
+//   { title: "Employee Database Management", color: "bg-transparent", image: "/images/calender.png" },
+//   { title: "Performance Management", color: "bg-transparent", image: "/images/clock.png" },
+//   { title: "Employee Onboarding", color: "bg-transparent", image: "/images/alert.png" },
+// ];
 export default async function Home() {
   const session = await getSession();
   const user = session?.user;
@@ -64,7 +64,7 @@ export default async function Home() {
         {/* Image Section */}
         <div className="md:w-1/2 flex items-center justify-center">
           <div className="relative">
-            <img src="rb_2250.png" alt="Mental Health Illustration" className="w-100 h-150" />
+            <Image src="rb_2250.png" alt="Mental Health Illustration" className="w-100 h-150" />
             {/* Replace '/path-to-your-image.png' with the actual path to your illustration */}
           </div>
         </div>
@@ -130,31 +130,31 @@ export default async function Home() {
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4">
 
     <div className="bg-purple-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <img className="w-24 h-24 rounded-full mb-4" src="pip1.jpeg" alt="User 1"/>
+      <Image className="w-24 h-24 rounded-full mb-4" src="pip1.jpeg" alt="User 1"/>
       <p className="text-gray-800 font-semibold">YourDOST helped me work on my listening skills and everything at work improved drastically. I learnt how to work together and achieve team targets.</p>
       <span className="mt-4 font-bold text-purple-600">Ajay</span>
     </div>
 
     <div className="bg-orange-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <img className="w-24 h-24 rounded-full mb-4" src="pip2.jpeg" alt="User 2"/>
+      <Image className="w-24 h-24 rounded-full mb-4" src="pip2.jpeg" alt="User 2"/>
       <p className="text-gray-800 font-semibold">YourDOST helped me navigate the transition from college to the corporate world. I discovered techniques that helped me regulate my emotions.</p>
       <span className="mt-4 font-bold text-orange-600">Ankit</span>
     </div>
 
     <div className="bg-purple-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <img className="w-24 h-24 rounded-full mb-4" src="pip3.jpeg" alt="User 3"/>
+      <Image className="w-24 h-24 rounded-full mb-4" src="pip3.jpeg" alt="User 3"/>
       <p className="text-gray-800 font-semibold">ADHD and overthinking made it difficult for me to make decisions and believe in myself. With YourDOST by my side, I am rebuilding myself.</p>
       <span className="mt-4 font-bold text-purple-600">Sneha</span>
     </div>
 
     <div className="bg-orange-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <img className="w-24 h-24 rounded-full mb-4" src="pip4.jpeg" alt="User 4"/>
+      <Image className="w-24 h-24 rounded-full mb-4" src="pip4.jpeg" alt="User 4"/>
       <p className="text-gray-800 font-semibold">I was unsure if I could succeed in civil engineering or if I should change my career. YourDOST helped me gain a shift in mindset.</p>
       <span className="mt-4 font-bold text-orange-600">Mohammed Khaja</span>
     </div>
 
     <div className="bg-purple-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <img className="w-24 h-24 rounded-full mb-4" src="/pip5.jpeg" alt="User 5"/>
+      <Image className="w-24 h-24 rounded-full mb-4" src="/pip5.jpeg" alt="User 5"/>
       <p className="text-gray-800 font-semibold">YourDOST helped me speak up confidently and voice opinions wherever needed. I was able to let go of thoughts that were holding me back.</p>
       <span className="mt-4 font-bold text-purple-600">Priya</span>
     </div>

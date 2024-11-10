@@ -1,10 +1,8 @@
 "use client"
-import React, { useEffect } from "react";
-import { useUser } from '@auth0/nextjs-auth0/client';
-import { db } from "../../firebaseConfig";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const Dashboard = () => {
   const { user, error, isLoading } = useUser();
@@ -12,35 +10,27 @@ const Dashboard = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
 
-  useEffect(() => {
-    const checkUserInDB = async () => {
-      if (user) {
-        const userRef = doc(db, "userDetails", user.nickname || "defaultNickname");
-        const userSnap = await getDoc(userRef);
-
-        // If user does not exist, add the user data
-        if (!userSnap.exists()) {
-          await setDoc(userRef, { ...user });
-          console.log("User data added to Firestore");
-        } else {
-          console.log("User already exists in Firestore");
-        }
-      }
-    };
-
-    checkUserInDB();
-  }, [user]);
-
   if (!isAuthenticated) return null;
 
+  // const isMentor = document.cookie.split('; ').find(row => row.startsWith('isMentor='))?.split('=')[1] === 'true';
+
   return (
-    <div className="flex h-fit m-4">
-      <div className="bg-white rounded-lg p-6 text-center max-w-md w-full border border-gray-300">
-        <h2 className="text-2xl font-bold mb-4">Welcome to the Dashboard</h2>
-        <p className="mb-6">Start chatting with people and explore new connections!</p>
-        <Link href={"/chat"}>
-          <Button variant={"default"} className="p-2 w-fit">{"Let's Chat!"}</Button>
-        </Link>
+    <div>
+      <div className="flex h-fit m-4 gap-20">
+        <div className="bg-white rounded-lg p-6 text-center max-w-md border border-gray-300 inline-block">
+          <h2 className="text-2xl font-bold mb-4">Welcome to the Dashboard</h2>
+          <p className="mb-6">Start chatting with people and explore new connections!</p>
+          <Link href={"/chat"}>
+            <Button variant={"default"} className="p-2 w-fit">{"Let's Chat!"}</Button>
+          </Link>
+        </div>
+        <div className="bg-white rounded-lg p-6 text-center max-w-md border border-gray-300 inline-block">
+          <h2 className="text-2xl font-bold mb-4">Take an Assessment</h2>
+          <p className="mb-6">Evaluate your skills and knowledge by taking an assessment.</p>
+          <Link href={"/assmt"}>
+            <Button variant={"default"} className="p-2 w-fit">{"Start Assessment"}</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

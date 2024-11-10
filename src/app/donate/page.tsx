@@ -2,21 +2,25 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 const Donation: React.FC = () => {
   return (
     <>
 
       {/* Navbar */}
-      <header className="flex justify-between items-center py-4 text-white px-8">
+      <header className="flex bg-rose-600 justify-between items-center py-4 text-white px-8">
         <div>
-          <a href="/home">
-            <Image src="/img/logo.png" alt="Logo" width={70} height={70} />
+          <a href="/">
+            <Image src="/SUKOON.png" alt="Logo" width={70} height={70} />
           </a>
         </div>
         <nav className="flex space-x-4">
-          <a href="/volunteer" className="text-black px-4 py-2 rounded-2xl">Volunteer</a>
-          <a href="/donate" className="bg-rose-600 text-white px-4 py-2 rounded-2xl">Donate</a>
+            <Button className='bg-white hover:bg-white'>
+
+                <a href="/volunteer" className="text-black px-4 py-2 rounded-2xl">Volunteer</a>
+            </Button>
+          <p className="bg-rose-600 text-white px-4 py-2 rounded-2xl">Donate</p>
         </nav>
         
       </header>

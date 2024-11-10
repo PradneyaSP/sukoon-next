@@ -6,13 +6,13 @@ export default function Volunteer() {
       {/* Navbar */}
       <header className="flex justify-between items-center py-4 text-white px-8">
         <div>
-          <a href="/home">
-            <Image src="/img/logo.png" alt="Logo" width={70} height={70} />
+          <a href="/">
+            <Image src="/SUKOON.png" alt="Logo" width={70} height={70} />
           </a>
         </div>
         <nav className="flex space-x-4">
-          <a href="/volunteer" className="bg-rose-600 px-4 py-2 rounded-2xl ">Volunteer</a>
-          <a href="/donate" className="text-black px-4 py-2 rounded-2xl">Donate</a>
+          <p className="text-black px-4 py-2 rounded-2xl ">Volunteer</p>
+          <a href="/donate" className="text-white bg-rose-600 px-4 py-2 rounded-2xl">Donate</a>
         </nav>
         
       </header>

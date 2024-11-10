@@ -2,16 +2,9 @@
 
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   LifeBuoy,
-  Map,
-  PieChart,
   Send,
-  Settings2,
-  SquareTerminal,
+  BookOpenCheck,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -27,7 +20,6 @@ import {
 } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user"
 import Image from "next/image"
-import Link from "next/link"
 
 const data = {
   user: {
@@ -39,20 +31,27 @@ const data = {
     {
       title: "Assessments",
       url: "#",
-      icon: SquareTerminal,
+      icon: BookOpenCheck,
+      forMentor: false,
       isActive: true,
       items: [
         { title: "Depression", url: "assmt/depression" },
-        { title: "Anxiety", url: "assmt/anxiety-disorders" },
+        { title: "Anxiety", url: "assmt/anxiety" },
         { title: "Bipolar", url: "assmt/bipolar-disorder" },
-        { title: "OCD", url: "assmt/ocd" },
-        { title: "PTSD", url: "assmt/ptsd" },
-        { title: "Schizophrenia", url: "assmt/schizophrenia" },
         { title: "ADHD", url: "assmt/adhd" },
-        { title: "Eating Disorders", url: "assmt/eating-disorders" },
-        { title: "Substance Use", url: "assmt/substance-use-disorders" },
-        { title: "Personality Disorders", url: "assmt/personality-disorders" },
       ],
+    },
+    {
+      title: "Mentorship",
+      url: "#",
+      icon: BookOpenCheck,
+      forMentor: true,
+      isActive: true,
+      items: [
+        { title: "student1", url: "mentorship/student1" },
+        { title: "student2", url: "mentorship/student2" },
+        { title: "student3", url: "mentorship/student3" },
+      ]
     },
   ],
   navSecondary: [
@@ -69,7 +68,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ isMentor, ...props }: React.ComponentProps<typeof Sidebar> & { isMentor: boolean }) {
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -90,11 +89,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain.filter((item) => item.forMentor === isMentor)} isMentor={isMentor} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser />
+        <NavUser isMentor={isMentor} />
       </SidebarFooter>
     </Sidebar>
   )

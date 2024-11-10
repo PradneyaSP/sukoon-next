@@ -8,6 +8,7 @@
 3. [Workflow](#workflow)
 4. [Technology Stack](#technology-stack)
 5. [Revenue Model](#revenue-model)
+6. [PPT Link](https://docs.google.com/presentation/d/1zTtoGNHRnJ4C7OIQf8z17Frkc2R-DwX-LzrhE6bqY1I/edit?usp=sharing)
 
 ---
 

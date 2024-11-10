@@ -14,7 +14,7 @@ export default async function Home() {
           <Image src="/bigLogo.png" alt="Sukoon" width={50} height={50} />
           <h1 className="text-2xl font-bold">Sukoon</h1>
         </div>
-        {session?.user ? (
+        {user ? (
           <div className="flex gap-10 text-lg ">
             <Link href="/dashboard">
               <Button className="text-secondary hover:bg-accent-dark transition-colors duration-300 text-lg" variant={"link"}>

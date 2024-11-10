@@ -8,23 +8,24 @@ import { useSearchParams } from 'next/navigation';
 
 export default function ChatRoomPage({ params }: { params: { room: string } }) {
     const [messages, setMessages] = useState<MessageType[]>([]);
-
-
+    
+    
     const searchParams = useSearchParams()
     const nickname = searchParams.get('nickname');
     const uid = searchParams.get('uid');
     const room = params.room;
-
-    if(!nickname || !uid) {
-        return <div>Missing nickname or uid</div>
-    }
-
+    
     useEffect(() => {
         if (room) {
             const unsubscribe = ChatService.subscribeToMessages(room, setMessages);
             return () => unsubscribe();
         }
     }, [room]);
+    
+    if(!nickname || !uid) {
+        return <div>Missing nickname or uid</div>
+    }
+
 
     const sendMessage = (text: string) => {
         ChatService.sendMessage(room, { text, uid, displayName: nickname });

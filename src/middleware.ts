@@ -1,5 +1,4 @@
 import { getSession } from '@auth0/nextjs-auth0/edge';
-import next from 'next';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -8,7 +7,7 @@ export async function middleware(req: NextRequest) {
 
     if (pathname === "/") return NextResponse.next(); // Allow access to public routes
 
-    const sensitiveRoutes = ["/dashboard", "/chat", "/assmt"]; // Add more routes as needed
+    const sensitiveRoutes = ["/dashboard", "/chat", "/assmt","/register-user"]; // Add more routes as needed
     const isLogin = pathname === "/api/auth/login";
     const isSignUp = pathname === "/api/auth/signup";
     const isAccessingSensitiveRoutes = sensitiveRoutes.some((route) => pathname.startsWith(route));
@@ -40,5 +39,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/", "/assmt/:path", "/chat/:path", "/dashboard/:path*", "/api/auth/login", "/api/auth/signup"],
+    matcher: ["/", "/assmt/:path", "/chat/:path", "/dashboard/:path*", "/api/auth/login", "/api/auth/signup", "/api/auth/logout","/assmt/:path","/register-user"],
 };

@@ -35,8 +35,6 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
   };
 
   const handleSubmit = () => {
-    const totalAssessmentScore = answers.reduce((sum, score) => sum + (score || 0), 0);
-    const totalScore = totalAssessmentScore + predictedScore;
     setShowResult(true);
   };
 
@@ -54,7 +52,7 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
     return () => {
       videoStream?.getTracks().forEach((track) => track.stop());
     };
-  }, []);
+  });
 
   useEffect(() => {
     if (!showDialog && videoStream) {
@@ -110,8 +108,8 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
     return <p>Invalid disorder selected. Please choose a valid disorder.</p>;
   }
 
-  const totalAssessmentScore = answers.reduce((sum, score) => sum + (score || 0), 0);
-  const combinedScore = totalAssessmentScore + predictedScore;
+  const totalAssessmentScore = answers.reduce((sum, score) => sum! + (score || 0), 0);
+  const combinedScore = totalAssessmentScore! + predictedScore;
   const intensityPercentage = Math.min(Math.round((combinedScore / (4 * disorderData.length)) * 100), 100);
 
   return (

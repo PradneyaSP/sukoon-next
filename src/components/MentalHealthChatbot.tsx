@@ -8,9 +8,12 @@ import { Card } from "@/components/ui/card";
 import { Alert } from "@/components/ui/alert";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import Link from "next/link";
 
 // Define the point system for answers
-const optionPoints = {
+type OptionPointsKey = "Not at all" | "Several days" | "More than half the days" | "Nearly every day" | "Never" | "Rarely" | "Sometimes" | "Often" | "Very Often";
+
+const optionPoints: Record<OptionPointsKey, number> = {
     "Not at all": 1,
     "Several days": 2,
     "More than half the days": 3,
@@ -22,24 +25,32 @@ const optionPoints = {
     "Very Often": 4,
 };
 
+// Define disorder score structure
+interface DisorderScores {
+    depression: number;
+    anxiety: number;
+    bipolar: number;
+    adhd: number;
+}
+
 const MentalHealthChatbot: React.FC = () => {
     const { user } = useUser();
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [responses, setResponses] = useState<string[]>([]);
     const [totalPoints, setTotalPoints] = useState<number>(0);
-    const [disorderScores, setDisorderScores] = useState<any>({ depression: 0, anxiety: 0, bipolar: 0, adhd: 0 });
+    const [disorderScores, setDisorderScores] = useState<DisorderScores>({ depression: 0, anxiety: 0, bipolar: 0, adhd: 0 });
     const [result, setResult] = useState<string | null>(null);
     const [showResult, setShowResult] = useState(false);
 
     const handleAnswer = async (answer: string) => {
-        const points = optionPoints[answer] || 0;
-        setTotalPoints(totalPoints + points);
-        setResponses([...responses, answer]);
+        const points = optionPoints[answer as OptionPointsKey] || 0;
+        setTotalPoints(prev => prev + points);
+        setResponses(prev => [...prev, answer]);
 
         updateDisorderScores(answer);
 
         if (currentQuestion < questions.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
+            setCurrentQuestion(prev => prev + 1);
         } else {
             await saveResponses();
             analyzeResponses();
@@ -48,21 +59,13 @@ const MentalHealthChatbot: React.FC = () => {
     };
 
     const updateDisorderScores = (answer: string) => {
-        const points = optionPoints[answer] || 0;
-        switch (questions[currentQuestion].disorder) {
-            case "depression":
-                setDisorderScores((prev) => ({ ...prev, depression: prev.depression + points }));
-                break;
-            case "anxiety":
-                setDisorderScores((prev) => ({ ...prev, anxiety: prev.anxiety + points }));
-                break;
-            case "bipolar":
-                setDisorderScores((prev) => ({ ...prev, bipolar: prev.bipolar + points }));
-                break;
-            case "adhd":
-                setDisorderScores((prev) => ({ ...prev, adhd: prev.adhd + points }));
-                break;
-        }
+        const points = optionPoints[answer as OptionPointsKey] || 0;
+        const disorder = questions[currentQuestion].disorder;
+        
+        setDisorderScores(prevScores => ({
+            ...prevScores,
+            [disorder]: prevScores[disorder as keyof DisorderScores] + points,
+        }));
     };
 
     const saveResponses = async () => {
@@ -74,7 +77,9 @@ const MentalHealthChatbot: React.FC = () => {
                 disorderScores: disorderScores,
                 timestamp: new Date().toISOString(),
             };
-            await setDoc(doc(db, "mentalHealthResponses", user.sub), userResponses);
+            if (user && user.sub) {
+                await setDoc(doc(db, "mentalHealthResponses", user.sub), userResponses);
+            }
         }
     };
 
@@ -98,7 +103,7 @@ const MentalHealthChatbot: React.FC = () => {
     return (
         <div className="container mx-auto p-6 sm:p-8">
             <div className="flex justify-center">
-                <Card className="p-6 max-w-xl shadow-lg bg-white rounded-lg space-y-6">
+                <Card className="p-6 max-w-2xl shadow-lg bg-white rounded-lg space-y-6">
                     <h2 className="text-2xl font-semibold text-center mb-4">Mental Health Assessment</h2>
 
                     {showResult ? (
@@ -119,17 +124,20 @@ const MentalHealthChatbot: React.FC = () => {
                                     );
                                 })}
                             </div>
+                            <Link href="/dashboard">
+                                <Button className="w-full bg-blue-500 text-white mt-6">Back to Dashboard</Button>
+                            </Link>
                         </div>
                     ) : (
                         <>
                             <div className="flex flex-col space-y-6">
                                 {currentQuestion < questions.length ? (
                                     <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                                        <div className="w-full sm:w-2/3 text-left bg-gray-100 p-4 rounded-lg shadow-sm">
-                                            <p className="text-lg font-medium">{`${questions[currentQuestion].text}`}</p>
+                                        <div className="w-full sm:w-3/5 text-left bg-gray-100 p-4 rounded-lg shadow-sm">
+                                            <p className="text-lg font-medium">{questions[currentQuestion].text}</p>
                                         </div>
 
-                                        <div className="w-full sm:w-1/3 bg-white p-4 rounded-lg shadow-md">
+                                        <div className="w-full sm:w-2/5 bg-white p-4 rounded-lg shadow-md">
                                             <p className="text-md font-medium mb-2">Choose an option:</p>
                                             <div className="space-y-2">
                                                 {questions[currentQuestion].options.map((option, index) => (
@@ -148,7 +156,6 @@ const MentalHealthChatbot: React.FC = () => {
                                 ) : null}
                             </div>
 
-                            {/* Custom horizontal progress bar */}
                             <div className="w-full bg-gray-300 rounded-full h-3 mt-6">
                                 <div
                                     className="bg-blue-500 h-3 rounded-full transition-all"

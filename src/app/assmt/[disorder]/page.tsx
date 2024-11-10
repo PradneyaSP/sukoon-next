@@ -1,6 +1,5 @@
 // src/app/disorder/[disorder]/page.tsx
 
-import { useRouter } from "next/router";
 import DisorderAssessment from "@/components/assessment/disorder-assessment";
 
 type DisorderPageProps = {

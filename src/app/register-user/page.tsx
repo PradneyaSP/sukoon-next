@@ -19,6 +19,7 @@ const RegisterMentor = () => {
     const [description, setDescription] = useState("");
     const [isRedirecting, setIsRedirecting] = useState(false);
     const [showForm, setShowForm] = useState(false); // Initially hide the form
+    const [isFinding, setIsFinding] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -34,13 +35,16 @@ const RegisterMentor = () => {
 
                 if (mentorDoc.exists()) {
                     document.cookie = "isMentor=true; path=/;";
-
                     setIsRedirecting(true);
                     router.push("/dashboard");
                 }
                 else if (userDoc.exists()) {
+                    document.cookie = "isMentor=true; path=/;";
                     setIsRedirecting(true);
                     router.push("/dashboard");
+                }
+                else {
+                    setIsFinding(true);
                 }
             } catch (error) {
                 console.error("Error checking user:", error);
@@ -48,7 +52,7 @@ const RegisterMentor = () => {
         }
 
         checkUserExists();
-    }, [user]);
+    }, [user,router]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -77,7 +81,8 @@ const RegisterMentor = () => {
 
     return (
         <div className="flex h-fit m-4 justify-center items-center mt-20">
-            {!isRedirecting && !showForm && (<div className="bg-secondary rounded-lg p-6 text-center max-w-md w-full border border-gray-300 text-secondary-foreground">
+            {!isFinding && !showForm && !isRedirecting && (<div>Loading...</div>)}
+            {isFinding && (<div className="bg-secondary rounded-lg p-6 text-center max-w-md w-full border border-gray-300 text-secondary-foreground">
                 {/* //card which asks if the user is a mentor or not */}
                 <h2 className="text-2xl font-bold mb-4">Are you a Mentor?</h2>
                 <Button variant={"default"} onClick={() => setShowForm(true)} className="mr-10">Yes, I am a Mentor</Button>

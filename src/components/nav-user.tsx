@@ -1,12 +1,8 @@
 "use client"
 
 import {
-  BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
-  Sparkles,
 } from "lucide-react"
 
 import {
@@ -29,8 +25,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useUser } from "@auth0/nextjs-auth0/client"
+import { FC } from "react"
 
-export function NavUser({isMentor}: Readonly<{isMentor: boolean}>) {
+interface NavUserProps {
+  isMentor: boolean
+}
+
+export const NavUser: FC<NavUserProps> = () => {
   const { isMobile } = useSidebar()
   const {user, error, isLoading } = useUser();
   if(isLoading) return <div>Loading...</div>;

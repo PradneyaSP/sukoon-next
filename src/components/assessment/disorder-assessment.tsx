@@ -14,7 +14,7 @@ type DisorderAssessmentProps = {
 export default function DisorderAssessment({ disorder }: DisorderAssessmentProps) {
   const [answers, setAnswers] = useState<(number | null)[]>(Array(disorderAssessments[disorder].length).fill(null));
   const [showDialog, setShowDialog] = useState(true);
-  const [model, setModel] = useState<tmImage.CustomImageModel | null>(null);
+  const [model, setModel] = useState<tmImage.CustomMobileNet | null>(null);
   const [predictions, setPredictions] = useState<string[]>([]);
   const router = useRouter();
   const webcamRef = useRef<tmImage.Webcam | null>(null);
@@ -29,12 +29,12 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
         const loadedModel = await tmImage.load(modelURL, metadataURL);
         setModel(loadedModel);
 
-        const webcam = new tmImage.Webcam(200, 200, true);  
+        const webcam = new tmImage.Webcam(200, 200, true);
         await webcam.setup();
         await webcam.play();
         webcamRef.current = webcam;
 
-        window.requestAnimationFrame(loop); 
+        window.requestAnimationFrame(loop);
       } catch (error) {
         console.error("Error loading Teachable Machine model:", error);
       }
@@ -45,7 +45,7 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
     return () => {
       webcamRef.current?.stop();
     };
-  }, []);
+  });
 
   const loop = async () => {
     if (webcamRef.current && model) {
@@ -82,9 +82,13 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
             <h3 className="text-xl font-bold mb-4">Camera Preview</h3>
-            <div id="webcam-container" ref={(container) => container && webcamRef.current?.canvas && container.appendChild(webcamRef.current.canvas)} />
+            <div id="webcam-container" ref={(container) => {
+              if (container && webcamRef.current?.canvas) {
+                container.appendChild(webcamRef.current.canvas);
+              }
+            }} />
             <button
-              onClick={() => setShowDialog(false)}  
+              onClick={() => setShowDialog(false)}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors font-medium"
             >
               Okay

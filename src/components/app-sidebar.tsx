@@ -32,19 +32,26 @@ const data = {
       title: "Assessments",
       url: "#",
       icon: BookOpenCheck,
+      forMentor: false,
       isActive: true,
       items: [
         { title: "Depression", url: "assmt/depression" },
         { title: "Anxiety", url: "assmt/anxiety" },
         { title: "Bipolar", url: "assmt/bipolar-disorder" },
-        // { title: "OCD", url: "assmt/ocd" },
-        // { title: "PTSD", url: "assmt/ptsd" },
-        // { title: "Schizophrenia", url: "assmt/schizophrenia" },
         { title: "ADHD", url: "assmt/adhd" },
-        // { title: "Eating Disorders", url: "assmt/eating-disorders" },
-        // { title: "Substance Use", url: "assmt/substance-use-disorders" },
-        // { title: "Personality Disorders", url: "assmt/personality-disorders" },
       ],
+    },
+    {
+      title: "Mentorship",
+      url: "#",
+      icon: BookOpenCheck,
+      forMentor: true,
+      isActive: true,
+      items: [
+        { title: "student1", url: "mentorship/student1" },
+        { title: "student2", url: "mentorship/student2" },
+        { title: "student3", url: "mentorship/student3" },
+      ]
     },
   ],
   navSecondary: [
@@ -82,7 +89,7 @@ export function AppSidebar({ isMentor, ...props }: React.ComponentProps<typeof S
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} isMentor={isMentor} />
+        <NavMain items={data.navMain.filter((item) => item.forMentor === isMentor)} isMentor={isMentor} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

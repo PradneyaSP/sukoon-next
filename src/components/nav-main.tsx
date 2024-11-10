@@ -34,9 +34,10 @@ export function NavMain({
   }[],
   isMentor: boolean
 }) {
+  console.log(items)
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Take Assessments</SidebarGroupLabel>
+      <SidebarGroupLabel>{isMentor ? "Your Mentees" : "Take Assessments"}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>

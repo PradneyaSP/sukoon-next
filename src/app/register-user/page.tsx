@@ -39,7 +39,7 @@ const RegisterMentor = () => {
                     router.push("/dashboard");
                 }
                 else if (userDoc.exists()) {
-                    document.cookie = "isMentor=true; path=/;";
+                    document.cookie = "isMentor=false; path=/;";
                     setIsRedirecting(true);
                     router.push("/dashboard");
                 }
@@ -70,7 +70,7 @@ const RegisterMentor = () => {
             description,
         });
         console.log("Mentor data added to Firestore");
-
+        document.cookie = "isMentor=true; path=/;";
         // Redirect to dashboard after submission
         router.push("/dashboard");
     };
@@ -91,6 +91,7 @@ const RegisterMentor = () => {
                     const userRef = doc(db, "userDetails", user.nickname || "defaultNickname");
                     await setDoc(userRef, { ...user });
                     console.log("User data added to Firestore");
+                    document.cookie = "isMentor=false; path=/;";
                     router.push("/dashboard");
                 }
                 }>No, I am a regular User</Button>

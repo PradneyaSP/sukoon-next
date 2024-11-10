@@ -88,19 +88,19 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
 
   const predictImage = async (image: string) => {
     try {
-      const URL = "https://teachablemachine.withgoogle.com/models/QhEkG_KNd/";
+      const URL = "https://teachablemachine.withgoogle.com/models/5HjEJJ-XG/  ";
       const modelURL = URL + "model.json";
       const metadataURL = URL + "metadata.json";
       const model = await tmImage.load(modelURL, metadataURL);
 
-      const imgElement = new Image();
+      const imgElement = new Image(); 
       imgElement.src = image;
       await imgElement.decode();
 
       const prediction = await model.predict(imgElement);
       prediction.sort((a, b) => b.probability - a.probability);
       setPredictedClass(prediction[0].className);
-      setPredictedScore(Math.round(prediction[0].probability * 100)); // Set a score based on confidence
+      setPredictedScore(Math.round(prediction[0].probability * 100)); 
     } catch (error) {
       console.error("Prediction error:", error);
     }

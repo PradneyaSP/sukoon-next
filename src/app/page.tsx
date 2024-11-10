@@ -65,7 +65,7 @@ export default async function Home() {
         {/* Image Section */}
         <div className="md:w-1/2 flex items-center justify-center">
           <div className="relative">
-            <Image src="rb_2250.png" alt="Mental Health Illustration" className="w-100 h-150" />
+            <Image src="/rb_2250.png" height={500} width={600} alt="Mental Health Illustration" />
             {/* Replace '/path-to-your-image.png' with the actual path to your illustration */}
           </div>
         </div>
@@ -81,29 +81,7 @@ export default async function Home() {
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgb(129 140 248)" fill-opacity="1" d="M0,320L80,282.7C160,245,320,171,480,154.7C640,139,800,181,960,186.7C1120,192,1280,160,1360,144L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
       </div>
-      {/* Grid box */}
-      {/* <div className="flex flex-col ">
-        <div className="justify-center mx-auto md:mb-10">
-          <h1 className="text-4xl font-bold text-indigo-950">Why Choose Us</h1>
-        </div>
-        <div className="flex justify-evenly sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-14 p-8 md:mx-28">
-
-        {cards.map((card, index) => (
-          <div
-          key={index}
-          className={`w-60 h-64 flex flex-col items-center justify-center p-6 rounded-2xl  ${card.color}`}
-          >
-            <Image src={card.image} alt={card.title} width={120} height={120} className="mb-6"/>
-            <h3 className="text-xl font-medium text-gray-700 text-center">
-              {card.title}
-            </h3>
-          </div>
-        ))}
-        </div>
-        
-      </div> */}
-
-      {/* Grid end */}
+      {/*  */}
 
        {/* empty */}
        <div className="flex min-h-screen justify-center items-center">
@@ -122,7 +100,9 @@ export default async function Home() {
 
       <div className="flex justify-center mx-auto"> 
       <Button className=" bg-pink-500 text-xl font-bold hover:bg-pink-800 rounded-full p-6 w-36">
-        DONATE
+        <a href="/donate">
+          DONATE
+          </a>
       </Button>
       </div>
          {/* reviews */}
@@ -134,31 +114,31 @@ export default async function Home() {
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4">
 
     <div className="bg-purple-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <Image className="w-24 h-24 rounded-full mb-4" src="pip1.jpeg" alt="User 1"/>
+      <Image height={24} width={184} className="rounded-full mb-4" src="/pip1.jpeg" alt="User 1"/>
       <p className="text-gray-800 font-semibold">YourDOST helped me work on my listening skills and everything at work improved drastically. I learnt how to work together and achieve team targets.</p>
       <span className="mt-4 font-bold text-purple-600">Ajay</span>
     </div>
 
     <div className="bg-orange-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <Image className="w-24 h-24 rounded-full mb-4" src="pip2.jpeg" alt="User 2"/>
+      <Image height={24} width={184} className=" rounded-full mb-4" src="/pip2.jpeg" alt="User 2"/>
       <p className="text-gray-800 font-semibold">YourDOST helped me navigate the transition from college to the corporate world. I discovered techniques that helped me regulate my emotions.</p>
       <span className="mt-4 font-bold text-orange-600">Ankit</span>
     </div>
 
     <div className="bg-purple-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <Image className="w-24 h-24 rounded-full mb-4" src="pip3.jpeg" alt="User 3"/>
+      <Image height={24} width={184} className="rounded-full mb-4" src="/pip3.jpeg" alt="User 3"/>
       <p className="text-gray-800 font-semibold">ADHD and overthinking made it difficult for me to make decisions and believe in myself. With YourDOST by my side, I am rebuilding myself.</p>
       <span className="mt-4 font-bold text-purple-600">Sneha</span>
     </div>
 
     <div className="bg-orange-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <Image className="w-24 h-24 rounded-full mb-4" src="pip4.jpeg" alt="User 4"/>
+      <Image height={24} width={184} className=" rounded-full mb-4" src="/pip4.jpeg" alt="User 4"/>
       <p className="text-gray-800 font-semibold">I was unsure if I could succeed in civil engineering or if I should change my career. YourDOST helped me gain a shift in mindset.</p>
       <span className="mt-4 font-bold text-orange-600">Mohammed Khaja</span>
     </div>
 
     <div className="bg-purple-100 flex flex-col items-center text-center rounded-t-lg rounded-b-full p-6 shadow-md">
-      <Image className="w-24 h-24 rounded-full mb-4" src="/pip5.jpeg" alt="User 5"/>
+      <Image height={24} width={184} className=" rounded-full mb-4" src="/pip5.jpeg" alt="User 5"/>
       <p className="text-gray-800 font-semibold">YourDOST helped me speak up confidently and voice opinions wherever needed. I was able to let go of thoughts that were holding me back.</p>
       <span className="mt-4 font-bold text-purple-600">Priya</span>
     </div>

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { disorderAssessments } from "@/lib/questions";
 import { Question } from "@/types/assessment";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import * as tmImage from "@teachablemachine/image";
 
 type DisorderAssessmentProps = {
   disorder: string;
@@ -12,72 +13,67 @@ type DisorderAssessmentProps = {
 
 export default function DisorderAssessment({ disorder }: DisorderAssessmentProps) {
   const [answers, setAnswers] = useState<(number | null)[]>(Array(disorderAssessments[disorder].length).fill(null));
-  const [showDialog, setShowDialog] = useState(true); // Controls the dialog visibility
-  const [videoStream, setVideoStream] = useState<MediaStream | null>(null);
+  const [showDialog, setShowDialog] = useState(true);
+  const [model, setModel] = useState<tmImage.CustomImageModel | null>(null);
+  const [predictions, setPredictions] = useState<string[]>([]);
   const router = useRouter();
+  const webcamRef = useRef<tmImage.Webcam | null>(null);
 
-  // Function to handle option change
+  const MODEL_URL = "https://teachablemachine.withgoogle.com/models/QhEkG_KNd/";
+
+  useEffect(() => {
+    const loadModel = async () => {
+      try {
+        const modelURL = MODEL_URL + "model.json";
+        const metadataURL = MODEL_URL + "metadata.json";
+        const loadedModel = await tmImage.load(modelURL, metadataURL);
+        setModel(loadedModel);
+
+        const webcam = new tmImage.Webcam(200, 200, true);  
+        await webcam.setup();
+        await webcam.play();
+        webcamRef.current = webcam;
+
+        window.requestAnimationFrame(loop); 
+      } catch (error) {
+        console.error("Error loading Teachable Machine model:", error);
+      }
+    };
+
+    loadModel();
+
+    return () => {
+      webcamRef.current?.stop();
+    };
+  }, []);
+
+  const loop = async () => {
+    if (webcamRef.current && model) {
+      webcamRef.current.update();
+      await predict();
+      window.requestAnimationFrame(loop);
+    }
+  };
+
+  const predict = async () => {
+    if (webcamRef.current && model) {
+      const predictions = await model.predict(webcamRef.current.canvas);
+      const formattedPredictions = predictions.map(
+        (p) => `${p.className}: ${(p.probability * 100).toFixed(2)}%`
+      );
+      setPredictions(formattedPredictions);
+    }
+  };
+
   const handleOptionChange = (questionIndex: number, score: number) => {
     const updatedAnswers = [...answers];
     updatedAnswers[questionIndex] = score;
     setAnswers(updatedAnswers);
   };
 
-  // Function to handle form submission
   const handleSubmit = () => {
     const totalScore = answers.reduce((sum, score) => sum! + (score || 0), 0);
     router.push(`/results?disorder=${disorder}&score=${totalScore}`);
-  };
-
-  // Set up the camera for the dialog box preview
-  useEffect(() => {
-    const startCameraPreview = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        setVideoStream(stream);
-      } catch (error) {
-        console.error("Error accessing camera:", error);
-      }
-    };
-    startCameraPreview();
-
-    return () => {
-      // Stop the camera when component unmounts
-      videoStream?.getTracks().forEach((track) => track.stop());
-    };
-  }, []);
-
-  // Start image capturing on dialog confirmation
-  useEffect(() => {
-    if (!showDialog) {
-      const videoElement = document.createElement("video");
-      if (videoStream) {
-        videoElement.srcObject = videoStream;
-        videoElement.play();
-        
-        const captureInterval = 3000;
-        const intervalId = setInterval(() => {
-          captureImage(videoElement);
-        }, captureInterval);
-
-        return () => {
-          clearInterval(intervalId);
-          videoStream.getTracks().forEach((track) => track.stop());
-        };
-      }
-    }
-  }, [showDialog]);
-
-  const captureImage = (videoElement: HTMLVideoElement) => {
-    const canvas = document.createElement("canvas");
-    canvas.width = videoElement.videoWidth;
-    canvas.height = videoElement.videoHeight;
-    const context = canvas.getContext("2d");
-    if (context) {
-      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-      const imageData = canvas.toDataURL("image/png");
-      console.log("Captured Image Data:", imageData);
-    }
   };
 
   return (
@@ -86,19 +82,9 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
             <h3 className="text-xl font-bold mb-4">Camera Preview</h3>
-            <video
-              autoPlay
-              playsInline
-              muted
-              ref={(video) => {
-                if (video && videoStream) {
-                  video.srcObject = videoStream;
-                }
-              }}
-              className="w-full rounded-lg mb-4"
-            />
+            <div id="webcam-container" ref={(container) => container && webcamRef.current?.canvas && container.appendChild(webcamRef.current.canvas)} />
             <button
-              onClick={() => setShowDialog(false)}
+              onClick={() => setShowDialog(false)}  
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors font-medium"
             >
               Okay
@@ -140,6 +126,14 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
         >
           Submit Assessment
         </button>
+      </div>
+      <div className="mt-4 text-center">
+        <h3 className="text-lg font-bold">Image Predictions</h3>
+        <ul>
+          {predictions.map((pred, idx) => (
+            <li key={idx}>{pred}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

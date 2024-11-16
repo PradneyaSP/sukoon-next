@@ -20,7 +20,7 @@ export default function StartHereButton() {
     if (isLoggedIn) {
       router.push('/dashboard');
     } else {
-      router.push('/login');
+      router.push('/api/auth/login');
     }
   };
 

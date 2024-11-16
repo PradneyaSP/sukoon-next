@@ -52,7 +52,7 @@ export default function DisorderAssessment({ disorder }: DisorderAssessmentProps
     return () => {
       videoStream?.getTracks().forEach((track) => track.stop());
     };
-  });
+  },[]);
 
   useEffect(() => {
     if (!showDialog && videoStream) {

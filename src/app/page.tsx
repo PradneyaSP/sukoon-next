@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import StartHereButton from "@/components/startButton";
+import SpotifyPlaylist from "@/components/spotifyComp";
 // const cards = [
 //   { title: "Employee Database Management", color: "bg-transparent", image: "/images/calender.png" },
 //   { title: "Performance Management", color: "bg-transparent", image: "/images/clock.png" },
@@ -75,7 +76,8 @@ export default async function Home() {
       
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgb(129 140 248)" fill-opacity="1" d="M0,320L80,282.7C160,245,320,171,480,154.7C640,139,800,181,960,186.7C1120,192,1280,160,1360,144L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
         <div className="h-[400px] bg-[#818CF8]">
-          
+        <SpotifyPlaylist/>
+
         </div>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgb(129 140 248)" fill-opacity="1" d="M0,320L80,282.7C160,245,320,171,480,154.7C640,139,800,181,960,186.7C1120,192,1280,160,1360,144L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
       </div>
